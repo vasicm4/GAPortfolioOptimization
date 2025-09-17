@@ -29,7 +29,18 @@ void Chromosome::mutate() {
 	double change = distDouble(gen);
 
 	values[rand1] += change;
-	values[rand2] -= change;
+	values[rand2] = values[rand2] - change > 0 ? values[rand2] - change : 0;
+
+	double sum = 0.0;
+
+	for (int i = 0; i < values.size(); i++) {
+		sum += values[i];
+	}
+
+	for (auto it = values.begin(); it != values.end(); ++it) {
+		*it /= sum;
+	}
+
 }
 
 
